@@ -1,0 +1,33 @@
+package com.mvnshrikanth.expenseservices.service;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mvnshrikanth.expenseservices.dto.ExpensesDto;
+import com.mvnshrikanth.expenseservices.dto.mapper.ExpensesMapper;
+import com.mvnshrikanth.expenseservices.model.Expenses;
+import com.mvnshrikanth.expenseservices.repositotry.ExpensesRepository;
+
+@Service
+public class ExpenseService {
+
+	ExpensesRepository expensesRepository;
+
+	@Autowired
+	public ExpenseService(ExpensesRepository expensesRepository) {
+		this.expensesRepository = expensesRepository;
+	}
+
+	public List<ExpensesDto> listAllExpenses() {
+		List<Expenses> expensesResult = expensesRepository.findAll();
+		if (expensesResult.isEmpty()) {
+			return Collections.emptyList();
+		}
+
+		return expensesResult.stream().map(ExpensesMapper::expensesToExpensesDto).toList();
+	}
+
+}
