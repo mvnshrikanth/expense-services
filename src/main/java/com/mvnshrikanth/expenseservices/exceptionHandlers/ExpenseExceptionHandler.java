@@ -15,6 +15,7 @@ public class ExpenseExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {ExpensesNotFoundException.class})
     public ResponseEntity<Object> handleExpenseNotFound(ExpensesNotFoundException expensesNotFoundException) {
-        return new ResponseEntity<>(new ErrorResponse(expensesNotFoundException.getMessage(), HttpStatus.NOT_FOUND, LocalDateTime.now()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ErrorResponse(expensesNotFoundException.getMessage(), HttpStatus.NOT_FOUND, LocalDateTime.now()),
+                HttpStatus.NOT_FOUND);
     }
 }
