@@ -7,24 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 @Entity
 @Table(name = "expenses")
 public class Expenses {
 
 	@Id
 	@Column(name = "expense_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long expenseId;
 
 	@Column(name = "item_name")
