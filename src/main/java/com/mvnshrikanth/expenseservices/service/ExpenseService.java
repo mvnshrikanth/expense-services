@@ -30,7 +30,7 @@ public class ExpenseService {
     }
 
     public ExpensesDto addExpense(ExpensesDto expensesDto) {
-        return ExpensesMapper.expensesToExpensesDto( expensesRepository.save(ExpensesMapper.expensesDtoToExpenses(expensesDto)));
+        return ExpensesMapper.expensesToExpensesDto(expensesRepository.save(ExpensesMapper.expensesDtoToExpenses(expensesDto)));
     }
 
 }
