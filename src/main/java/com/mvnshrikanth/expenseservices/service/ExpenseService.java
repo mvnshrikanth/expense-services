@@ -41,4 +41,7 @@ public class ExpenseService {
         return ExpensesMapper.expensesToExpensesDto(expensesRepository.save(ExpensesMapper.expensesDtoToExpenses(expensesDto)));
     }
 
+    public ExpensesDto deleteExpense(Long expenseId) {
+        return ExpensesMapper.expensesToExpensesDto(expensesRepository.deleteByExpenseId(expenseId));
+    }
 }

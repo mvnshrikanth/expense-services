@@ -41,9 +41,9 @@ public class ExpenseController {
         return new ResponseEntity<>("Edited", HttpStatus.OK);
     }
 
-    @PostMapping(value = "/deleteexpense", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<String> deleteExpense() {
-        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    @PostMapping(value = "/deleteexpense/{expenseId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ExpensesDto> deleteExpense(@PathVariable Long expenseId) {
+        return new ResponseEntity<>(expenseService.deleteExpense(expenseId), HttpStatus.OK);
     }
 
 
