@@ -1,4 +1,4 @@
-package com.mvnshrikanth.expenseservices.dto;
+package com.mvnshrikanth.expenseservices.model;
 
 import lombok.Data;
 

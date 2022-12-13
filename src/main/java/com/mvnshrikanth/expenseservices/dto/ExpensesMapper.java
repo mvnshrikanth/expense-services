@@ -1,9 +1,9 @@
-package com.mvnshrikanth.expenseservices.dto.mapper;
+package com.mvnshrikanth.expenseservices.dto;
+
+import com.mvnshrikanth.expenseservices.model.Expenses;
+import com.mvnshrikanth.expenseservices.model.ExpensesDto;
 
 import java.math.BigDecimal;
-
-import com.mvnshrikanth.expenseservices.dto.ExpensesDto;
-import com.mvnshrikanth.expenseservices.model.Expenses;
 
 public class ExpensesMapper {
 

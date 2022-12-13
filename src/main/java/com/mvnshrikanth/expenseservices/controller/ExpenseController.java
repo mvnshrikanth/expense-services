@@ -1,6 +1,6 @@
 package com.mvnshrikanth.expenseservices.controller;
 
-import com.mvnshrikanth.expenseservices.dto.ExpensesDto;
+import com.mvnshrikanth.expenseservices.model.ExpensesDto;
 import com.mvnshrikanth.expenseservices.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +21,14 @@ public class ExpenseController {
         this.expenseService = expenseService;
     }
 
-    @GetMapping(value = "/listallexpenses", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<ExpensesDto>> listAllExpenses() {
-        return new ResponseEntity<>(expenseService.listAllExpenses(), HttpStatus.OK);
+    @GetMapping(value = "/getallexpenses", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<ExpensesDto>> getAllExpenses() {
+        return new ResponseEntity<>(expenseService.getAllExpenses(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getexpense/{expenseId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ExpensesDto> getExpense(@PathVariable Long expenseId) {
+        return new ResponseEntity<>(expenseService.getExpense(expenseId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/addexepnse", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -37,7 +42,7 @@ public class ExpenseController {
     }
 
     @PostMapping(value = "/deleteexpense", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<String> deleteExepnse() {
+    public ResponseEntity<String> deleteExpense() {
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
     }
 

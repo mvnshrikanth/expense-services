@@ -1,4 +1,4 @@
-package com.mvnshrikanth.expenseservices.exceptionHandlers;
+package com.mvnshrikanth.expenseservices.exceptionhandlers;
 
 import com.mvnshrikanth.expenseservices.exceptions.ExpensesNotFoundException;
 import com.mvnshrikanth.expenseservices.model.ErrorResponse;
