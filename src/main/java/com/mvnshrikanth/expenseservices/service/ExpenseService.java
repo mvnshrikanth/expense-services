@@ -7,6 +7,7 @@ import com.mvnshrikanth.expenseservices.model.ExpensesDto;
 import com.mvnshrikanth.expenseservices.repositotry.ExpensesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class ExpenseService {
         if (expensesResult.isEmpty()) {
             throw new ExpensesNotFoundException("No expenses available.");
         }
-
         return expensesResult.stream().map(ExpensesMapper::expensesToExpensesDto).toList();
     }
 
@@ -41,7 +41,12 @@ public class ExpenseService {
         return ExpensesMapper.expensesToExpensesDto(expensesRepository.save(ExpensesMapper.expensesDtoToExpenses(expensesDto)));
     }
 
-    public ExpensesDto deleteExpense(Long expenseId) {
-        return ExpensesMapper.expensesToExpensesDto(expensesRepository.deleteByExpenseId(expenseId));
+    @Transactional
+    public String deleteExpense(Long expenseId) {
+        long rowsDeleted = expensesRepository.deleteByExpenseId(expenseId);
+        if (rowsDeleted == 0) {
+            throw new ExpensesNotFoundException(String.format("No expense available for expense ID: %d", expenseId));
+        }
+        return String.format("Expense deleted for Expense ID: %d", expenseId);
     }
 }

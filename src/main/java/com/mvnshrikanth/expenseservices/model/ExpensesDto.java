@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 @Data
 public class ExpensesDto {
 
-    @NotNull(message = "Please pass an ID")
     private Long expenseId;
     @NotNull(message = "Please pass an Item Name")
     @Size(min = 5, message = "Should be greater than 5")

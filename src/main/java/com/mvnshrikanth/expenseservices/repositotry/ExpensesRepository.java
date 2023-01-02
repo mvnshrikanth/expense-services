@@ -6,5 +6,5 @@ import com.mvnshrikanth.expenseservices.model.Expenses;
 
 public interface ExpensesRepository extends JpaRepository<Expenses, Long> {
     Expenses findByExpenseId(Long expenseId);
-    Expenses deleteByExpenseId(Long expenseId);
+    Long deleteByExpenseId(Long expenseId);
 }
