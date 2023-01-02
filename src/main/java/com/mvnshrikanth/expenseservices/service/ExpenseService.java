@@ -11,8 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.mvnshrikanth.expenseservices.util.APIConstants.NO_EXPENSE_AVAILABLE_FOR_EXPENSE_ID;
+
 @Service
 public class ExpenseService {
+
 
     ExpensesRepository expensesRepository;
 
@@ -32,7 +35,7 @@ public class ExpenseService {
     public ExpensesDto getExpense(Long expenseId) {
         Expenses expense = expensesRepository.findByExpenseId(expenseId);
         if (expense == null) {
-            throw new ExpensesNotFoundException(String.format("No expense available for expense ID: %d", expenseId));
+            throw new ExpensesNotFoundException(String.format(NO_EXPENSE_AVAILABLE_FOR_EXPENSE_ID, expenseId));
         }
         return ExpensesMapper.expensesToExpensesDto(expensesRepository.findByExpenseId(expenseId));
     }
@@ -45,8 +48,16 @@ public class ExpenseService {
     public String deleteExpense(Long expenseId) {
         long rowsDeleted = expensesRepository.deleteByExpenseId(expenseId);
         if (rowsDeleted == 0) {
-            throw new ExpensesNotFoundException(String.format("No expense available for expense ID: %d", expenseId));
+            throw new ExpensesNotFoundException(String.format(NO_EXPENSE_AVAILABLE_FOR_EXPENSE_ID, expenseId));
         }
         return String.format("Expense deleted for Expense ID: %d", expenseId);
+    }
+
+    public ExpensesDto updateExpense(ExpensesDto expensesDto) {
+        Expenses expense = expensesRepository.findByExpenseId(expensesDto.getExpenseId());
+        if (expense == null) {
+            throw new ExpensesNotFoundException(String.format(NO_EXPENSE_AVAILABLE_FOR_EXPENSE_ID, expensesDto.getExpenseId()));
+        }
+        return ExpensesMapper.expensesToExpensesDto(expensesRepository.save(ExpensesMapper.expensesDtoToExpenses(expensesDto)));
     }
 }

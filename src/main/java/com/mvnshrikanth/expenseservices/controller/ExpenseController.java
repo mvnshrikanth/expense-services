@@ -37,8 +37,8 @@ public class ExpenseController {
     }
 
     @PostMapping(value = "/updateexpense", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<String> updateExpense() {
-        return new ResponseEntity<>("Edited", HttpStatus.OK);
+    public ResponseEntity<ExpensesDto> updateExpense(@RequestBody ExpensesDto expensesDto) {
+        return new ResponseEntity<>(expenseService.updateExpense(expensesDto), HttpStatus.OK);
     }
 
     @PostMapping(value = "/deleteexpense/{expenseId}", produces = {MediaType.APPLICATION_JSON_VALUE})
